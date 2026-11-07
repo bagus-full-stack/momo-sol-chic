@@ -80,6 +80,18 @@ Build de production : `npm run build` (génère `out/`).
 3. Créer l'admin : Supabase → Authentication → Users → Invite user (mot de passe fort). Désactiver les inscriptions publiques, car tout utilisateur connecté est administrateur.
 4. Renseigner les contenus : 7 services avec photo, 10 réalisations (dont 3 avant/après), 20 chunks de base de connaissances (puis cliquer sur l'indexation), 3 témoignages publiés, 10 questions de FAQ.
 
+### Accès à l'administration
+
+Aucun lien du site public ne mène à l'administration : saisir l'adresse à la main.
+
+| Environnement | URL |
+|---------------|-----|
+| En ligne | `https://<compte-github>.github.io/momo-sol-chic/admin/login/` (sans domaine personnalisé) |
+| Domaine personnalisé | `https://<domaine>/admin/login/` |
+| Local | `http://localhost:3100/admin/login` (après `npm run dev`) |
+
+Le préfixe `/momo-sol-chic` correspond à la variable `BASE_PATH`. Après connexion, le tableau de bord est à `/admin/dashboard/`. Le compte administrateur doit exister au préalable (étape 3 ci-dessus). Sans session, les pages `/admin/*` redirigent vers `/admin/login/`.
+
 Le contenu des services, réalisations et FAQ est lu au build : après une modification dans l'admin, relancer le workflow `Deploy to GitHub Pages` (Actions → Run workflow) ou pousser un commit.
 
 ## Structure du projet
