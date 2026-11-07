@@ -41,12 +41,13 @@ async function checkRateLimit(key: string, max: number): Promise<boolean> {
 
 async function getEmbedding(text: string): Promise<number[]> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${GEMINI_API_KEY}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "models/text-embedding-004",
+        model: "models/gemini-embedding-001",
+        outputDimensionality: 768, // colonne vector(768)
         content: { parts: [{ text }] },
         taskType: "RETRIEVAL_QUERY",
       }),
@@ -57,12 +58,34 @@ async function getEmbedding(text: string): Promise<number[]> {
   return data.embedding.values as number[];
 }
 
-async function geminiChat(
+// Modèles essayés dans l'ordre : on passe au suivant dès qu'un appel échoue (modèle arrêté, quota, surcharge)
+const CHAT_MODELS = [
+  "gemini-flash-latest",
+  "gemini-3.6-flash",
+  "gemini-3.5-flash",
+  "gemini-3.1-flash-lite",
+  "gemini-flash-lite-latest",
+  "gemini-pro-latest",
+];
+
+// Dernier recours : tous les modèles de génération que la clé peut réellement appeler
+async function discoverModels(): Promise<string[]> {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?pageSize=200&key=${GEMINI_API_KEY}`);
+  if (!res.ok) return [];
+  const data = await res.json();
+  return (data.models ?? [])
+    .filter((m: { name: string; supportedGenerationMethods?: string[] }) =>
+      m.supportedGenerationMethods?.includes("generateContent") && /^models\/gemini-/.test(m.name) && !/(image|tts|audio|live|embedding|robotics|computer)/.test(m.name))
+    .map((m: { name: string }) => m.name.replace("models/", ""));
+}
+
+async function callModel(
+  model: string,
   systemPrompt: string,
   messages: { role: "user" | "model"; parts: { text: string }[] }[]
 ): Promise<string> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -73,9 +96,32 @@ async function geminiChat(
       }),
     }
   );
-  if (!res.ok) throw new Error(`Gemini error: ${res.status}`);
-  const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "Je n'ai pas pu générer une réponse.";
+  if (!res.ok) throw new Error(`${model}: HTTP ${res.status}`);
+  const text = (await res.json()).candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error(`${model}: réponse vide`);
+  return text;
+}
+
+async function geminiChat(
+  systemPrompt: string,
+  messages: { role: "user" | "model"; parts: { text: string }[] }[]
+): Promise<string> {
+  const tried = new Set<string>();
+  const attempt = async (models: string[]) => {
+    for (const m of models) {
+      if (tried.has(m)) continue;
+      tried.add(m);
+      try {
+        return await callModel(m, systemPrompt, messages);
+      } catch (e) {
+        console.error("modèle en échec:", (e as Error).message);
+      }
+    }
+    return null;
+  };
+  const answer = (await attempt(CHAT_MODELS)) ?? (await attempt(await discoverModels()));
+  if (!answer) throw new Error("Tous les modèles Gemini ont échoué");
+  return answer;
 }
 
 serve(async (req) => {

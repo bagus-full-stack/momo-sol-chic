@@ -9,7 +9,7 @@ Application web de **Sol-Chic**, entreprise de revêtement et rénovation sols &
 | Frontend | Next.js 14 (App Router, **export statique**) |
 | Styling | Tailwind CSS + composants shadcn/ui |
 | Backend | Supabase Edge Functions (Deno) |
-| IA / RAG | Gemini 2.0 Flash + text-embedding-004 |
+| IA / RAG | Gemini (`gemini-flash-latest`) + `gemini-embedding-001` (768 dimensions) |
 | BDD | Supabase PostgreSQL + pgvector |
 | Stockage | Supabase Storage (buckets `services`, `realisations`) |
 | Emails | Resend |
