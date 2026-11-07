@@ -117,19 +117,12 @@ export default async function HomePage() {
               </Button>
             </div>
             <div className="rounded-2xl bg-brand-navy p-8 text-white">
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { value: "500+", label: "Chantiers réalisés" },
-                  { value: "10+", label: "Années d'expérience" },
-                  { value: "98%", label: "Clients satisfaits" },
-                  { value: "24h", label: "Délai de réponse" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <p className="text-4xl font-black text-brand-gold">{stat.value}</p>
-                    <p className="text-sm text-white/70 mt-1">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
+              <h3 className="font-display text-2xl font-extrabold mb-2">Un projet à Ouagadougou ?</h3>
+              <p className="text-white/80 mb-6">Appelez-nous ou écrivez-nous sur WhatsApp : on vous répond avec un devis gratuit.</p>
+              <a href="tel:+22676206927" className="block font-display text-3xl font-extrabold text-brand-gold hover:underline underline-offset-4 mb-4">+226 76 20 69 27</a>
+              <Button className="bg-green-700 text-white hover:bg-green-800" asChild>
+                <a href="https://wa.me/22676206927" target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a>
+              </Button>
             </div>
           </div>
         </div>

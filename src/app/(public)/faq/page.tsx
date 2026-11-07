@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FaqList from "@/components/public/FaqList";
 import PageHeader from "@/components/public/PageHeader";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -65,24 +66,7 @@ export default async function FAQPage() {
 
       <section className="py-16 bg-brand-light">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="space-y-4">
-            {faq.map((item, i) => (
-              <details
-                key={i}
-                className="group rounded-xl bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] overflow-hidden"
-              >
-                <summary className="flex cursor-pointer items-center justify-between p-5 font-semibold text-brand-navy list-none">
-                  {item.question}
-                  <span className="ml-4 shrink-0 text-brand-gold group-open:rotate-45 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-xl leading-none">
-                    +
-                  </span>
-                </summary>
-                <div className="border-t border-gray-100 px-5 py-4 text-gray-700 text-sm leading-relaxed">
-                  {item.answer}
-                </div>
-              </details>
-            ))}
-          </div>
+          <FaqList items={faq} />
 
           <div className="mt-12 rounded-2xl bg-brand-navy p-8 text-center text-white">
             <h2 className="text-xl font-bold mb-2">Vous n'avez pas trouvé votre réponse ?</h2>

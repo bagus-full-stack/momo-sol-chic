@@ -22,9 +22,9 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-black text-brand-gold tracking-wide">SOL</span>
-            <span className="text-2xl font-black text-white">-CHIC</span>
+          <Link href="/" className="flex items-center font-display">
+            <span className="text-2xl font-extrabold text-brand-gold">SOL</span>
+            <span className="text-2xl font-extrabold text-white">-CHIC</span>
           </Link>
 
           {/* Desktop nav */}

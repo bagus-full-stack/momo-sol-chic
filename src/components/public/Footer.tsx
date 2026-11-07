@@ -17,9 +17,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-3">
-              <span className="text-2xl font-black text-brand-gold">SOL</span>
-              <span className="text-2xl font-black text-white">-CHIC</span>
+            <div className="mb-3 font-display">
+              <span className="text-2xl font-extrabold text-brand-gold">SOL</span>
+              <span className="text-2xl font-extrabold text-white">-CHIC</span>
             </div>
             <p className="text-sm text-white/70 mb-4">
               Votre partenaire de confiance pour tous vos travaux de rénovation et de construction à Ouagadougou.
