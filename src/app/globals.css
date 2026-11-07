@@ -35,7 +35,16 @@
   }
 
   h1, h2, h3, h4, h5 {
-    @apply font-bold;
+    @apply font-display font-bold tracking-tight;
+    text-wrap: balance;
+  }
+
+  ::selection { background: #f0a500; color: #1a3a6b; }
+  :focus-visible { outline: 2px solid #f0a500; outline-offset: 2px; }
+  html { scrollbar-color: #1a3a6b #f8f9fa; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 }
 

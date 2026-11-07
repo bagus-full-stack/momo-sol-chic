@@ -9,7 +9,7 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <div className="group rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
+    <div className="group rounded-xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] hover:shadow-[0_10px_24px_rgba(26,58,107,0.16)] hover:-translate-y-1 transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         {service.images?.[0] ? (
@@ -17,7 +17,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             src={service.images[0]}
             alt={service.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
           />
         ) : (
           <div className="h-full bg-gradient-to-br from-brand-navy to-brand-navy-light flex items-center justify-center">
@@ -29,7 +29,6 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       {/* Content */}
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-2xl">{service.icon}</span>
           <h2 className="font-bold text-brand-navy text-lg leading-tight">{service.name}</h2>
         </div>
         <p className="text-sm text-gray-600 mb-4 line-clamp-2">{service.short_description}</p>

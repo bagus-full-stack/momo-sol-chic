@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.openstreetmap.org;"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${display.variable}`}>{children}</body>
     </html>
   );
 }

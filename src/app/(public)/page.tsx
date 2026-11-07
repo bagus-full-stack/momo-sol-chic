@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import HeroMosaic from "@/components/public/HeroMosaic";
 import ServiceCard from "@/components/public/ServiceCard";
 import TestimonialCard from "@/components/public/TestimonialCard";
 import { supabase } from "@/lib/supabase";
@@ -34,24 +35,15 @@ export default async function HomePage() {
       />
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="relative bg-brand-navy overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0a500' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-          }}
-        />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-          <div className="max-w-2xl">
-            <span className="inline-block rounded-full bg-brand-gold/20 px-4 py-1 text-sm font-semibold text-brand-gold mb-6">
-              N°1 à Ouagadougou
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-xl">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.05] tracking-tight text-balance mb-6">
               Vos travaux de{" "}
               <span className="text-brand-gold">rénovation</span>{" "}
               entre de bonnes mains
             </h1>
-            <p className="text-lg text-white/70 mb-8 max-w-xl">
+            <p className="text-lg text-white/80 mb-8 max-w-prose">
               Carrelage, peinture, toiture, étanchéité — Sol-Chic transforme vos espaces avec
               expertise et passion depuis plus de 10 ans à Ouagadougou.
             </p>
@@ -63,6 +55,8 @@ export default async function HomePage() {
                 <Link href="/realisations">Voir nos réalisations</Link>
               </Button>
             </div>
+          </div>
+          <HeroMosaic />
           </div>
         </div>
       </section>
