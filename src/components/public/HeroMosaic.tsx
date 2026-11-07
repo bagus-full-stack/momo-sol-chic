@@ -4,9 +4,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-// Mosaïque de carreaux (le métier de Sol-Chic) : seul moment animé de l'accueil.
-const TONES = ["bg-brand-gold", "bg-brand-navy-light", "bg-white/10", "bg-white/20", "bg-brand-gold-light", "bg-white/5"];
-const TILES = Array.from({ length: 24 }, (_, i) => TONES[(i * 7 + (i % 5)) % TONES.length]);
+// Vrais carreaux Sol-Chic (détourés du catalogue), empilés en éventail. Seul moment animé de l'accueil.
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const SLABS = [
+  { name: "decoratif", w: 534, h: 185, cls: "self-end -mb-5 relative z-0" },
+  { name: "bois", w: 480, h: 164, cls: "self-start -mb-5 relative z-10" },
+  { name: "pierre", w: 480, h: 175, cls: "self-center relative z-20" },
+];
 
 export default function HeroMosaic() {
   const root = useRef<HTMLDivElement>(null);
@@ -15,23 +19,24 @@ export default function HeroMosaic() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from(".tile", {
-          opacity: 0,
-          scale: 0.6,
-          rotate: -6,
-          duration: 0.7,
-          ease: "expo.out",
-          stagger: { each: 0.035, grid: [4, 6], from: "start" },
-        });
+        gsap.from(".slab", { opacity: 0, y: 28, x: (i) => (i % 2 ? -24 : 24), duration: 0.9, ease: "expo.out", stagger: 0.12 });
       });
     },
     { scope: root }
   );
 
   return (
-    <div ref={root} aria-hidden="true" className="hidden md:grid grid-cols-6 gap-2 w-full max-w-md ml-auto">
-      {TILES.map((tone, i) => (
-        <div key={i} className={`tile aspect-square rounded-md ${tone} shadow-[0_2px_6px_rgba(0,0,0,0.25)]`} />
+    <div ref={root} aria-hidden="true" className="hidden md:flex flex-col w-full max-w-lg ml-auto">
+      {SLABS.map((s) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={s.name}
+          src={`${BASE}/tuiles/${s.name}.webp`}
+          width={s.w}
+          height={s.h}
+          alt=""
+          className={`slab w-[92%] h-auto drop-shadow-[0_14px_18px_rgba(0,0,0,0.35)] ${s.cls}`}
+        />
       ))}
     </div>
   );
