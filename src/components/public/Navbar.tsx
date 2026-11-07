@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,8 +15,15 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+// trailingSlash est actif : on normalise avant de comparer ("/services/" == "/services")
+function isActive(pathname: string, href: string) {
+  const p = pathname.replace(/\/$/, "") || "/";
+  return href === "/" ? p === "/" : p === href || p.startsWith(href + "/");
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? "/";
 
   return (
     <header className="sticky top-0 z-50 bg-brand-navy shadow-md">
@@ -35,8 +43,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive(pathname, link.href) ? "page" : undefined}
                 className={cn(
-                  "text-sm font-medium text-white/80 hover:text-brand-gold transition-colors",
+                  "relative text-sm font-medium text-white/80 hover:text-brand-gold transition-colors",
+                  "after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-brand-gold after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)] aria-[current=page]:text-white aria-[current=page]:after:scale-x-100",
+                  link.href === "/devis" && "after:hidden",
                   link.href === "/devis" &&
                     "rounded-full bg-brand-gold px-4 py-1.5 text-brand-navy hover:bg-brand-gold-light hover:text-brand-navy"
                 )}
@@ -74,7 +85,8 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block py-3 text-sm font-medium text-white/80 hover:text-brand-gold border-b border-white/10 last:border-0"
+              aria-current={isActive(pathname, link.href) ? "page" : undefined}
+              className="block py-3 text-sm font-medium text-white/80 hover:text-brand-gold border-b border-white/10 last:border-0 aria-[current=page]:text-brand-gold aria-[current=page]:font-bold"
             >
               {link.label}
             </Link>
