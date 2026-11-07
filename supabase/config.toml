@@ -13,9 +13,6 @@ major_version = 15
 [studio]
 port = 54323
 
-[inbucket]
-port = 54324
-
 [storage]
 file_size_limit = "50MiB"
 
