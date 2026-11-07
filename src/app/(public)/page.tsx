@@ -5,7 +5,7 @@ import ServiceCard from "@/components/public/ServiceCard";
 import TestimonialCard from "@/components/public/TestimonialCard";
 import { supabase } from "@/lib/supabase";
 import type { Service, Temoignage } from "@/types";
-import { ArrowRight, CheckCircle, Star, Shield, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 async function getData() {
   const [{ data: services }, { data: temoignages }] = await Promise.all([
@@ -57,27 +57,6 @@ export default async function HomePage() {
             </div>
           </div>
           <HeroMosaic />
-          </div>
-        </div>
-      </section>
-
-      {/* ── ATOUTS ───────────────────────────────────────────── */}
-      <section className="bg-brand-gold py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-brand-navy">
-            {[
-              { icon: <Shield className="h-6 w-6" />, title: "Artisans certifiés", desc: "Équipes qualifiées et expérimentées" },
-              { icon: <Star className="h-6 w-6" />, title: "Qualité garantie", desc: "Matériaux de premier choix" },
-              { icon: <Clock className="h-6 w-6" />, title: "Délais respectés", desc: "Ponctualité et rigueur sur chaque chantier" },
-            ].map((item) => (
-              <div key={item.title} className="flex items-center gap-3">
-                <div className="shrink-0">{item.icon}</div>
-                <div>
-                  <p className="font-bold text-sm">{item.title}</p>
-                  <p className="text-xs">{item.desc}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
