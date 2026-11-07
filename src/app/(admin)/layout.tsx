@@ -31,7 +31,8 @@ const NAV = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
+  // trailingSlash: usePathname() renvoie "/admin/login/", pas "/admin/login"
+  const pathname = usePathname().replace(/\/$/, "");
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
