@@ -53,7 +53,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       {/* Header */}
       <section className="bg-brand-navy py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/services" className="inline-flex items-center gap-1 text-white/60 hover:text-brand-gold text-sm mb-6">
+          <Link href="/services" className="inline-flex items-center gap-1 text-white/80 hover:text-brand-gold text-sm mb-6">
             <ArrowLeft className="h-4 w-4" /> Retour aux services
           </Link>
           <div className="flex items-center gap-4">
@@ -90,7 +90,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {/* Avantages */}
             <div className="mt-10 rounded-xl bg-brand-light p-6">
-              <h3 className="font-black text-brand-navy text-xl mb-4">Nos engagements</h3>
+              <h2 className="font-black text-brand-navy text-xl mb-4">Nos engagements</h2>
               <ul className="space-y-3">
                 {["Devis gratuit sous 24h", "Artisans qualifiés et expérimentés", "Matériaux de qualité premium", "Délais respectés", "Garantie sur les travaux"].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-gray-700">
@@ -105,7 +105,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           {/* Sidebar devis */}
           <div>
             <div className="sticky top-20 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-black text-brand-navy mb-1">Demander un devis</h3>
+              <h2 className="text-xl font-black text-brand-navy mb-1">Demander un devis</h2>
               <p className="text-sm text-gray-500 mb-6">Gratuit et sans engagement</p>
               {service.price_range && (
                 <div className="mb-5 rounded-lg bg-brand-gold/10 px-4 py-2 text-sm font-semibold text-brand-navy">

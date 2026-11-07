@@ -25,10 +25,10 @@ export default function Footer() {
               Votre partenaire de confiance pour tous vos travaux de rénovation et de construction à Ouagadougou.
             </p>
             <div className="flex gap-3">
-              <a href="#" aria-label="Facebook" className="text-white/60 hover:text-brand-gold transition-colors">
+              <a href="#" aria-label="Facebook" className="text-white/80 hover:text-brand-gold transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Instagram" className="text-white/60 hover:text-brand-gold transition-colors">
+              <a href="#" aria-label="Instagram" className="text-white/80 hover:text-brand-gold transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -36,7 +36,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold text-brand-gold mb-4">Nos Services</h3>
+            <h2 className="font-bold text-brand-gold mb-4">Nos Services</h2>
             <ul className="space-y-2">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
@@ -53,7 +53,7 @@ export default function Footer() {
 
           {/* Liens */}
           <div>
-            <h3 className="font-bold text-brand-gold mb-4">Liens utiles</h3>
+            <h2 className="font-bold text-brand-gold mb-4">Liens utiles</h2>
             <ul className="space-y-2">
               {[
                 { href: "/realisations", label: "Réalisations" },
@@ -75,7 +75,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-bold text-brand-gold mb-4">Contact</h3>
+            <h2 className="font-bold text-brand-gold mb-4">Contact</h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-white/70">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" />
@@ -103,7 +103,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
+        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/75">
           © {new Date().getFullYear()} Sol-Chic. Tous droits réservés.
         </div>
       </div>

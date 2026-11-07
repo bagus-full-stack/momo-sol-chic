@@ -80,7 +80,7 @@ export default async function HomePage() {
                 <div className="shrink-0">{item.icon}</div>
                 <div>
                   <p className="font-bold text-sm">{item.title}</p>
-                  <p className="text-xs opacity-80">{item.desc}</p>
+                  <p className="text-xs">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -93,7 +93,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-4">
-              Nos <span className="text-brand-gold">Services</span>
+              Nos <span className="text-amber-700">Services</span>
             </h2>
             <p className="text-gray-600 max-w-xl mx-auto">
               De la pose de carrelage à l'étanchéité, nous couvrons tous vos besoins en rénovation et construction.
@@ -122,7 +122,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-6">
-                Pourquoi choisir <span className="text-brand-gold">Sol-Chic</span> ?
+                Pourquoi choisir <span className="text-amber-700">Sol-Chic</span> ?
               </h2>
               <ul className="space-y-4">
                 {[
@@ -168,7 +168,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-black text-brand-navy mb-3">
-                Ce que disent nos <span className="text-brand-gold">clients</span>
+                Ce que disent nos <span className="text-amber-700">clients</span>
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

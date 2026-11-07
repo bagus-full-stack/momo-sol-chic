@@ -108,6 +108,7 @@ export default function DevisForm({ preselectedService }: { preselectedService?:
         <label className="block text-sm font-medium text-gray-700 mb-1">Service souhaité *</label>
         <Select
           {...register("service")}
+          aria-label="Service souhaité"
           options={SERVICE_OPTIONS}
           placeholder="Choisissez un service"
         />

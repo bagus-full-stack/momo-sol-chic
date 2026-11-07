@@ -94,7 +94,7 @@ export default async function FAQPage() {
           </div>
 
           <div className="mt-12 rounded-2xl bg-brand-navy p-8 text-center text-white">
-            <h3 className="text-xl font-bold mb-2">Vous n'avez pas trouvé votre réponse ?</h3>
+            <h2 className="text-xl font-bold mb-2">Vous n'avez pas trouvé votre réponse ?</h2>
             <p className="text-white/70 mb-6 text-sm">
               Notre assistant IA ou notre équipe peuvent vous aider directement.
             </p>

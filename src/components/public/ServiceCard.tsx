@@ -30,11 +30,11 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl">{service.icon}</span>
-          <h3 className="font-bold text-brand-navy text-lg leading-tight">{service.name}</h3>
+          <h2 className="font-bold text-brand-navy text-lg leading-tight">{service.name}</h2>
         </div>
         <p className="text-sm text-gray-600 mb-4 line-clamp-2">{service.short_description}</p>
         {service.price_range && (
-          <p className="text-xs text-brand-gold font-semibold mb-3">{service.price_range}</p>
+          <p className="text-xs text-amber-700 font-semibold mb-3">{service.price_range}</p>
         )}
         <Link
           href={`/services/${service.slug}`}

@@ -50,7 +50,7 @@ export default async function RealisationsPage() {
                   <div className="mt-3">
                     <p className="font-bold text-brand-navy">{r.title}</p>
                     {r.services && (
-                      <span className="text-xs text-brand-gold font-semibold">{r.services.name}</span>
+                      <span className="text-xs text-amber-700 font-semibold">{r.services.name}</span>
                     )}
                   </div>
                 </div>

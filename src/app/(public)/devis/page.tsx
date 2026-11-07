@@ -36,7 +36,7 @@ export default function DevisPage() {
             {/* Info sidebar */}
             <div className="space-y-6">
               <div className="rounded-xl bg-brand-navy p-6 text-white">
-                <h3 className="font-bold text-brand-gold mb-4">Pourquoi nous choisir ?</h3>
+                <h2 className="font-bold text-brand-gold mb-4">Pourquoi nous choisir ?</h2>
                 <ul className="space-y-3">
                   {[
                     "Réponse sous 24h",
@@ -75,7 +75,7 @@ export default function DevisPage() {
                 >
                   +226 76 20 69 27
                 </a>
-                <p className="text-xs text-brand-navy/70 mt-1">Disponible 7j/7</p>
+                <p className="text-xs text-brand-navy mt-1">Disponible 7j/7</p>
               </div>
             </div>
           </div>

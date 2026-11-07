@@ -62,7 +62,7 @@ export default function ChatWidget() {
             <Bot className="h-5 w-5 text-brand-gold" />
             <div>
               <p className="text-sm font-bold text-white">Assistant Sol-Chic</p>
-              <p className="text-xs text-white/60">Réponses rapides sur nos services</p>
+              <p className="text-xs text-white/80">Réponses rapides sur nos services</p>
             </div>
           </div>
 
