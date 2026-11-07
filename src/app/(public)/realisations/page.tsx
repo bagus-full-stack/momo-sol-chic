@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/public/PageHeader";
 import GalleryGrid from "@/components/public/GalleryGrid";
 import { supabase } from "@/lib/supabase";
 import type { Realisation } from "@/types";
@@ -23,17 +24,7 @@ export default async function RealisationsPage() {
 
   return (
     <>
-      {/* Header */}
-      <section className="bg-brand-navy py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Nos <span className="text-brand-gold">Réalisations</span>
-          </h1>
-          <p className="text-white/70 max-w-xl mx-auto">
-            Découvrez quelques-uns de nos chantiers réalisés à Ouagadougou et ses environs.
-          </p>
-        </div>
-      </section>
+      <PageHeader prefix="Nos" accent="Réalisations" subtitle="Découvrez quelques-uns de nos chantiers réalisés à Ouagadougou et ses environs." />
 
       {/* Before / After */}
       {withBA.length > 0 && (

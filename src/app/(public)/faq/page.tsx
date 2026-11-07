@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/public/PageHeader";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
@@ -60,17 +61,7 @@ export default async function FAQPage() {
 
   return (
     <>
-      {/* Header */}
-      <section className="bg-brand-navy py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Questions <span className="text-brand-gold">Fréquentes</span>
-          </h1>
-          <p className="text-white/70 max-w-xl mx-auto">
-            Retrouvez les réponses aux questions les plus posées par nos clients.
-          </p>
-        </div>
-      </section>
+      <PageHeader prefix="Questions" accent="Fréquentes" subtitle="Retrouvez les réponses aux questions les plus posées par nos clients." />
 
       <section className="py-16 bg-brand-light">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -78,11 +69,11 @@ export default async function FAQPage() {
             {faq.map((item, i) => (
               <details
                 key={i}
-                className="group rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden"
+                className="group rounded-xl bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] overflow-hidden"
               >
                 <summary className="flex cursor-pointer items-center justify-between p-5 font-semibold text-brand-navy list-none">
                   {item.question}
-                  <span className="ml-4 shrink-0 text-brand-gold group-open:rotate-45 transition-transform">
+                  <span className="ml-4 shrink-0 text-brand-gold group-open:rotate-45 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-xl leading-none">
                     +
                   </span>
                 </summary>

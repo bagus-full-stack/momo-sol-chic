@@ -59,8 +59,8 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="flex items-center gap-4">
             <span className="text-5xl">{service.icon}</span>
             <div>
-              <h1 className="text-4xl font-black text-white">{service.name}</h1>
-              <p className="text-white/70 mt-1">{service.short_description}</p>
+              <h1 className="font-display text-4xl md:text-5xl font-extrabold text-white tracking-tight text-balance">{service.name}</h1>
+              <p className="text-white/80 mt-1">{service.short_description}</p>
             </div>
           </div>
         </div>

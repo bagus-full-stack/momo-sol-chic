@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/public/PageHeader";
 import ServiceCard from "@/components/public/ServiceCard";
 import { supabase } from "@/lib/supabase";
 import type { Service } from "@/types";
@@ -25,17 +26,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      {/* Header */}
-      <section className="bg-brand-navy py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Nos <span className="text-brand-gold">Services</span>
-          </h1>
-          <p className="text-white/70 max-w-xl mx-auto text-lg">
-            Sol-Chic vous offre une gamme complète de services pour tous vos projets de construction et de rénovation.
-          </p>
-        </div>
-      </section>
+      <PageHeader prefix="Nos" accent="Services" subtitle="Sol-Chic vous offre une gamme complète de services pour tous vos projets de construction et de rénovation." />
 
       {/* Grid */}
       <section className="py-16 bg-brand-light">

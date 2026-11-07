@@ -1,5 +1,6 @@
 import MapEmbed from "@/components/public/MapEmbed";
 import type { Metadata } from "next";
+import PageHeader from "@/components/public/PageHeader";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,17 +11,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Header */}
-      <section className="bg-brand-navy py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Nous <span className="text-brand-gold">Contacter</span>
-          </h1>
-          <p className="text-white/70 max-w-xl mx-auto">
-            Notre équipe est disponible pour répondre à toutes vos questions.
-          </p>
-        </div>
-      </section>
+      <PageHeader prefix="Nous" accent="Contacter" subtitle="Notre équipe est disponible pour répondre à toutes vos questions." />
 
       <section className="py-16 bg-brand-light">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -58,7 +49,7 @@ export default function ContactPage() {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="flex items-start gap-4 rounded-xl bg-white border border-gray-200 p-5 shadow-sm"
+                  className="flex items-start gap-4 rounded-xl bg-white p-5 shadow-[0_1px_3px_rgba(26,58,107,0.12)]"
                 >
                   <div className="mt-0.5 shrink-0">{item.icon}</div>
                   <div>
@@ -77,7 +68,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map placeholder */}
-            <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm min-h-[400px] flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] min-h-[400px] flex flex-col">
               <MapEmbed />
               <div className="p-4 border-t border-gray-100">
                 <p className="text-sm text-gray-500 text-center">

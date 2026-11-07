@@ -38,7 +38,7 @@ export default function GalleryGrid({ items }: { items: Realisation[] }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {shown.map((r) => (
-          <button key={r.id} onClick={() => setOpen(r)} className="text-left rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+          <button key={r.id} onClick={() => setOpen(r)} className="text-left rounded-xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] hover:shadow-[0_10px_24px_rgba(26,58,107,0.16)] hover:-translate-y-1 transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
             <div className="relative aspect-video">
               <Image src={r.images[0]} alt={r.title} fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" loading="lazy" className="object-cover" />
             </div>

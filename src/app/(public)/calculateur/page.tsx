@@ -24,7 +24,7 @@ export default function CalculateurPage() {
 
   return (
     <div className="mx-auto max-w-xl px-4 py-16">
-      <h1 className="text-3xl font-black text-brand-navy mb-2">Calculateur de surface</h1>
+      <h1 className="font-display text-3xl md:text-4xl font-extrabold text-brand-navy mb-2">Calculateur de surface</h1>
       <p className="text-gray-600 mb-8">Estimez la quantité de carrelage, colle et joints (carreaux 60×60 cm, 10 % de chutes).</p>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
@@ -34,7 +34,7 @@ export default function CalculateurPage() {
       <label className="text-sm block mb-6">ou surface directe (m²)<Input inputMode="decimal" value={direct} onChange={(e) => setDirect(e.target.value)} /></label>
 
       {r && (
-        <div className="rounded-xl border border-gray-200 bg-white p-6 mb-6" aria-live="polite">
+        <div className="rounded-xl bg-white p-6 shadow-[0_1px_3px_rgba(26,58,107,0.12)] mb-6" aria-live="polite">
           <p className="font-bold text-brand-navy mb-3">Surface : {m2.toFixed(1)} m²</p>
           <ul className="space-y-1 text-gray-700">
             <li>{r.carreaux} carreaux recommandés</li>

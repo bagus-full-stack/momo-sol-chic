@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/public/PageHeader";
 import DevisForm from "@/components/public/DevisForm";
 import { CheckCircle, Clock, Phone } from "lucide-react";
 
@@ -10,24 +11,14 @@ export const metadata: Metadata = {
 export default function DevisPage() {
   return (
     <>
-      {/* Header */}
-      <section className="bg-brand-navy py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Devis <span className="text-brand-gold">Gratuit</span>
-          </h1>
-          <p className="text-white/70 max-w-xl mx-auto text-lg">
-            Remplissez le formulaire ci-dessous et notre équipe vous contactera sous 24h.
-          </p>
-        </div>
-      </section>
+      <PageHeader prefix="Devis" accent="Gratuit" subtitle="Remplissez le formulaire ci-dessous et notre équipe vous contactera sous 24h." />
 
       <section className="py-16 bg-brand-light">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-white p-8 shadow-sm border border-gray-200">
+              <div className="rounded-2xl bg-white p-8 shadow-[0_1px_3px_rgba(26,58,107,0.12)]">
                 <h2 className="text-2xl font-black text-brand-navy mb-6">Votre demande de devis</h2>
                 <DevisForm />
               </div>
@@ -53,7 +44,7 @@ export default function DevisPage() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-gray-200 bg-white p-6">
+              <div className="rounded-xl bg-white p-6 shadow-[0_1px_3px_rgba(26,58,107,0.12)]">
                 <div className="flex items-center gap-3 mb-3">
                   <Clock className="h-5 w-5 text-brand-gold" />
                   <p className="font-bold text-brand-navy">Horaires</p>

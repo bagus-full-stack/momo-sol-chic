@@ -7,7 +7,7 @@ interface TestimonialCardProps {
 
 export default function TestimonialCard({ temoignage }: TestimonialCardProps) {
   return (
-    <div className="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+    <div className="rounded-xl bg-white p-6 shadow-[0_1px_3px_rgba(26,58,107,0.12)]">
       {/* Stars */}
       <div className="flex gap-0.5 mb-3">
         {Array.from({ length: 5 }).map((_, i) => (
