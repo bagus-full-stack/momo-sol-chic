@@ -27,19 +27,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Simple in-memory rate limiter (per IP, resets on cold start)
-const rateLimiter = new Map<string, { count: number; reset: number }>();
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimiter.get(ip);
-  if (!entry || now > entry.reset) {
-    rateLimiter.set(ip, { count: 1, reset: now + 60_000 });
+// Rate limit persistant (table rate_limits, migration 007) : survit aux cold starts
+const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+async function checkRateLimit(key: string, max: number): Promise<boolean> {
+  const { data, error } = await db.rpc("check_rate_limit", { p_key: key, p_max: max, p_window_seconds: 60 });
+  if (error) {
+    // shortcut: fail-open si la base est injoignable (ne pas perdre un prospect), à durcir si abus constaté
+    console.error("rate limit error:", error);
     return true;
   }
-  if (entry.count >= 20) return false;
-  entry.count++;
-  return true;
+  return data === true;
 }
 
 async function getEmbedding(text: string): Promise<number[]> {
@@ -85,7 +82,7 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  if (!checkRateLimit(ip)) {
+  if (!(await checkRateLimit(`chat:${ip}`, 20))) {
     return new Response(JSON.stringify({ error: "Trop de requêtes. Réessayez dans 1 minute." }), {
       status: 429,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -111,8 +108,7 @@ serve(async (req) => {
     const embedding = await getEmbedding(String(lastUserMsg.text).slice(0, 1000));
 
     // ── 2. Recherche sémantique dans la base de connaissances ─
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-    const { data: chunks } = await supabase.rpc("match_knowledge_chunks", {
+    const { data: chunks } = await db.rpc("match_knowledge_chunks", {
       query_embedding: embedding,
       match_threshold: 0.4,
       match_count: 5,

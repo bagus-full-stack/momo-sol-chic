@@ -14,18 +14,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Rate limiter par IP (20 devis/min max)
-const rateLimiter = new Map<string, { count: number; reset: number }>();
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimiter.get(ip);
-  if (!entry || now > entry.reset) {
-    rateLimiter.set(ip, { count: 1, reset: now + 60_000 });
+// Rate limit persistant (table rate_limits, migration 007) : survit aux cold starts
+const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+async function checkRateLimit(key: string, max: number): Promise<boolean> {
+  const { data, error } = await db.rpc("check_rate_limit", { p_key: key, p_max: max, p_window_seconds: 60 });
+  if (error) {
+    // shortcut: fail-open si la base est injoignable (ne pas perdre un prospect), à durcir si abus constaté
+    console.error("rate limit error:", error);
     return true;
   }
-  if (entry.count >= 10) return false;
-  entry.count++;
-  return true;
+  return data === true;
 }
 
 const esc = (v: unknown) =>
@@ -61,11 +59,34 @@ async function sendNotificationEmail(devis: Record<string, unknown>) {
   });
 }
 
+// Confirmation au client (uniquement s'il a renseigné un email)
+async function sendClientConfirmation(devis: Record<string, unknown>) {
+  if (!RESEND_API_KEY || !devis.email) return;
+
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: "Sol-Chic <noreply@sol-chic.com>",
+      to: [String(devis.email)],
+      subject: "Sol-Chic — Nous avons bien reçu votre demande de devis",
+      html: `
+        <h2 style="color:#1a3a6b">Merci ${esc(devis.nom)} !</h2>
+        <p>Nous avons bien reçu votre demande de devis pour : <strong>${esc(devis.service)}</strong>.</p>
+        <p>Notre équipe vous rappelle très prochainement au <strong>${esc(devis.telephone)}</strong>.</p>
+        <p style="color:#666">Toute estimation reste indicative, sous réserve de visite technique.</p>
+        <p>Une question urgente ? Appelez-nous au <a href="tel:+22676206927">+226 76 20 69 27</a>.</p>
+        <p>— L'équipe Sol-Chic, Ouagadougou</p>
+      `,
+    }),
+  });
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   const ip = (req.headers.get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
-  if (!checkRateLimit(ip)) {
+  if (!(await checkRateLimit(`devis:${ip}`, 10))) {
     return new Response(
       JSON.stringify({ error: "Trop de requêtes. Veuillez patienter." }),
       { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -95,8 +116,7 @@ serve(async (req) => {
     }
 
     // Insertion en base
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from("devis")
       .insert({
         nom: String(payload.nom).slice(0, 100),
@@ -112,8 +132,9 @@ serve(async (req) => {
 
     if (error) throw error;
 
-    // Notification email (non bloquant)
+    // Emails admin + client (non bloquants)
     sendNotificationEmail(data).catch(console.error);
+    sendClientConfirmation(data).catch(console.error);
 
     return new Response(
       JSON.stringify({ success: true, id: data.id, message: "Votre demande a bien été envoyée." }),
