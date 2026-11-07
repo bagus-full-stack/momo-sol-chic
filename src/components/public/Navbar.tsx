@@ -22,7 +22,9 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center font-display">
+          <Link href="/" className="flex items-center font-display" aria-label="Sol-Chic, accueil">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-emblem.webp`} width={48} height={40} alt="" className="h-10 w-auto mr-2" />
             <span className="text-2xl font-extrabold text-brand-gold">SOL</span>
             <span className="text-2xl font-extrabold text-white">-CHIC</span>
           </Link>

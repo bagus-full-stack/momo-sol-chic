@@ -17,7 +17,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-3 font-display">
+            <div className="mb-3 font-display flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-emblem.webp`} width={48} height={40} alt="" className="h-10 w-auto mr-2" />
               <span className="text-2xl font-extrabold text-brand-gold">SOL</span>
               <span className="text-2xl font-extrabold text-white">-CHIC</span>
             </div>
