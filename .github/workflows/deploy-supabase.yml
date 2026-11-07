@@ -47,6 +47,5 @@ jobs:
         run: |
           supabase secrets set \
             GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY }}" \
-            SUPABASE_SERVICE_ROLE_KEY="${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
             RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
             ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}"
