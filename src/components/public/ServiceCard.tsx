@@ -11,7 +11,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   return (
     <div className="group rounded-xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(26,58,107,0.12)] hover:shadow-[0_10px_24px_rgba(26,58,107,0.16)] hover:-translate-y-0.5 transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
       {/* Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-36 sm:h-48 overflow-hidden">
         {service.images?.[0] ? (
           <Image
             src={service.images[0]}
@@ -21,7 +21,12 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           />
         ) : (
           <div className="h-full bg-gradient-to-br from-brand-navy to-brand-navy-light flex items-center justify-center">
-            <span className="text-5xl">{service.icon}</span>
+            {service.slug === "carrelage-faience" ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/tuiles/decoratif.webp`} width={264} height={92} alt="" className="w-3/4 h-auto drop-shadow-[0_10px_14px_rgba(0,0,0,0.35)]" />
+            ) : (
+              <span className="text-5xl">{service.icon}</span>
+            )}
           </div>
         )}
       </div>

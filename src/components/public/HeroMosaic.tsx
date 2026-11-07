@@ -7,9 +7,9 @@ import { useGSAP } from "@gsap/react";
 // Vrais carreaux Sol-Chic (détourés du catalogue), empilés en éventail. Seul moment animé de l'accueil.
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const SLABS = [
-  { name: "decoratif", w: 534, h: 185, cls: "self-end -mb-5 relative z-0" },
-  { name: "bois", w: 480, h: 164, cls: "self-start -mb-5 relative z-10" },
-  { name: "pierre", w: 480, h: 175, cls: "self-center relative z-20" },
+  { name: "decoratif", w: 534, h: 185, cls: "self-end relative z-0 md:-mb-5" },
+  { name: "bois", w: 480, h: 164, cls: "hidden md:block self-start -mb-5 relative z-10" },
+  { name: "pierre", w: 480, h: 175, cls: "hidden md:block self-center relative z-20" },
 ];
 
 export default function HeroMosaic() {
@@ -26,7 +26,7 @@ export default function HeroMosaic() {
   );
 
   return (
-    <div ref={root} aria-hidden="true" className="hidden md:flex flex-col w-full max-w-lg ml-auto">
+    <div ref={root} aria-hidden="true" className="flex flex-col w-full max-w-sm md:max-w-lg md:ml-auto mt-2 md:mt-0">
       {SLABS.map((s) => (
         // eslint-disable-next-line @next/next/no-img-element
         <img
